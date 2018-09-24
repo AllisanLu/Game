@@ -1,2 +1,2 @@
-public class PhysicsEngine {
+public abstract class  PhysicsEngine {
 }
