@@ -1,12 +1,23 @@
-import java.awt.*;
-
+import javafx.scene.image.Image;
 public class Player {
     private int wins;
-    private Dimension place;
+    private int XPosition;
+    private int YPosition;
+    private Image model;
 
-    public Player(Dimension place) {
+    public Player(int x, int y) {
         wins = 0;
-        this.place = place;
+        XPosition = x;
+        YPosition = y;
+        //model = new Image("C:/Users/ned_n/OneDrive/Documents/GitHub/Game/First.gif");
+    }
+
+    public Image getModel() {
+        return model;
+    }
+
+    public void setModel(Image model) {
+        this.model = model;
     }
 
     public int getWins() {
@@ -17,11 +28,19 @@ public class Player {
         this.wins = wins;
     }
 
-    public Dimension getPlace() {
-        return place;
+    public int getYPosition() {
+        return YPosition;
     }
 
-    public void setPlace(Dimension place) {
-        this.place = place;
+    public void setYPosition(int yPosition) {
+        this.YPosition = yPosition;
+    }
+
+    public int getXPosition() {
+        return XPosition;
+    }
+
+    public void setXPosition(int xPosition) {
+        this.XPosition = xPosition;
     }
 }
