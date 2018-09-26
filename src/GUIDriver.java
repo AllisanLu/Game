@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
 
 public class GUIDriver extends Application {
-    private Canvas canvas;
     private static Canvas canvas;
     private boolean fNorth, fEast, fWest, sNorth, sEast, sWest;
     @Override
