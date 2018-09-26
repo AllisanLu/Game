@@ -17,6 +17,8 @@ public class  PhysicsEngine {
     private int positionX;
     private int positionY;
 
+    private long lastNanoTime = 0; // for change in time in the formulas
+
     /**
      *
      * @param positionX The starting X coordinate of the Object that uses this class
@@ -25,7 +27,7 @@ public class  PhysicsEngine {
     public PhysicsEngine(int positionX, int positionY) {
         this.positionX = positionX;
         this.positionY = positionY;
-        accelerationY = -9.81;
+        accelerationY = 9.81;
         accelerationX = 0;
     }
 
@@ -34,7 +36,6 @@ public class  PhysicsEngine {
      * @return
      */
     private double calculateAccelerationY() {
-
         return accelerationY;
     }
 
@@ -42,8 +43,8 @@ public class  PhysicsEngine {
      * Calculates acceleration to use for calculating velocity in the X-direction.
      * @return
      */
-    private double calculateAccelerationX() {
-
+    private double calculateAccelerationX(int direction) {                                              //if the accelertaion is left then negative, if right then positive
+        accelerationX = 1 * direction;
         return accelerationX;
     }
 
@@ -51,8 +52,8 @@ public class  PhysicsEngine {
      * Calculates velocity to use for calculating position in the Y-direction.
      * @return
      */
-    private double calculateVelocityY() {
-        velocityY += calculateAccelerationY();
+    private double calculateVelocityY(long currentNanoTime) {
+        velocityY += calculateAccelerationY() * (currentNanoTime-lastNanoTime) * Math.pow(10, 9) / 2;        //divide by 2 for average velocity since acceleration is constant
         return velocityY;
     }
 
@@ -60,16 +61,19 @@ public class  PhysicsEngine {
      * Calculates velocity to use for calculating position in the X-direction.
      * @return
      */
-    private double calculateVelocityX() {
-        velocityX += calculateAccelerationX();
+    private double calculateVelocityX(long currentNanoTime, int direction) {
+        velocityX += calculateAccelerationX(direction) * (currentNanoTime-lastNanoTime) * Math.pow(10, 9) / 2;
         return velocityX;
     }
 
-    public int getPositionY() {
+    public int getPositionY(long currentNanoTime) {                         //when updating lastNanoTime, call getPositionX last although i doubt it would matter much since yea too less of an impact
+        positionY += velocityY * currentNanoTime;
         return positionY;
     }
 
-    public int getPositionX() {
+    public int getPositionX(long currentNanoTime) {
+        positionX += velocityX * currentNanoTime;
+        lastNanoTime = currentNanoTime;
         return positionX;
     }
 

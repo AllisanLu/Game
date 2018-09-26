@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f3109fd-26e5-420e-b54e-918074747767" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/GUIDriver.java" afterPath="$PROJECT_DIR$/src/GUIDriver.java" />
       <change beforePath="$PROJECT_DIR$/src/PhysicsEngine.java" afterPath="$PROJECT_DIR$/src/PhysicsEngine.java" />
-      <change beforePath="$PROJECT_DIR$/src/Platform.java" afterPath="$PROJECT_DIR$/src/Platform.java" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,7 +40,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GUIDriver.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GUIDriver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUIDriver.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-414">
@@ -56,20 +52,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PhysicsEngine.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PhysicsEngine.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PhysicsEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="99" column="1" lean-forward="false" selection-start-line="99" selection-start-column="1" selection-end-line="99" selection-end-column="1" />
+            <state relative-caret-position="810">
+              <caret line="69" column="49" lean-forward="true" selection-start-line="69" selection-start-column="49" selection-end-line="69" selection-end-column="49" />
               <folding>
-                <element signature="method#PhysicsEngine#0;class#PhysicsEngine#0" expanded="false" />
-                <element signature="method#calculateAccelerationY#0;class#PhysicsEngine#0" expanded="false" />
-                <element signature="method#calculateAccelerationX#0;class#PhysicsEngine#0" expanded="false" />
-                <element signature="method#calculateVelocityY#0;class#PhysicsEngine#0" expanded="false" />
-                <element signature="e#1846#1847#0" expanded="true" />
-                <element signature="e#1878#1879#0" expanded="true" />
-                <element signature="e#1911#1912#0" expanded="true" />
-                <element signature="e#1943#1944#0" expanded="true" />
+                <element signature="e#1187#1188#0" expanded="true" />
+                <element signature="e#1223#1224#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -130,8 +120,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/Player.java" />
         <option value="$PROJECT_DIR$/src/Platform.java" />
-        <option value="$PROJECT_DIR$/src/PhysicsEngine.java" />
         <option value="$PROJECT_DIR$/src/GUIDriver.java" />
+        <option value="$PROJECT_DIR$/src/PhysicsEngine.java" />
       </list>
     </option>
   </component>
@@ -303,14 +293,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="3" lean-forward="true" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
           <folding>
-            <element signature="method#PhysicsEngine#0;class#PhysicsEngine#0" expanded="false" />
-            <element signature="method#calculateAccelerationY#0;class#PhysicsEngine#0" expanded="false" />
-            <element signature="method#calculateAccelerationX#0;class#PhysicsEngine#0" expanded="false" />
-            <element signature="method#calculateVelocityY#0;class#PhysicsEngine#0" expanded="false" />
-            <element signature="e#1846#1847#0" expanded="true" />
-            <element signature="e#1878#1879#0" expanded="true" />
-            <element signature="e#1911#1912#0" expanded="true" />
-            <element signature="e#1943#1944#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1223#1224#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -345,14 +329,6 @@
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/javafx-src.zip!/javafx/animation/AnimationTimer.java" />
-    <entry file="file://$PROJECT_DIR$/src/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Platform.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="589">
@@ -374,29 +350,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PhysicsEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="99" column="1" lean-forward="false" selection-start-line="99" selection-start-column="1" selection-end-line="99" selection-end-column="1" />
-          <folding>
-            <element signature="method#PhysicsEngine#0;class#PhysicsEngine#0" expanded="false" />
-            <element signature="method#calculateAccelerationY#0;class#PhysicsEngine#0" expanded="false" />
-            <element signature="method#calculateAccelerationX#0;class#PhysicsEngine#0" expanded="false" />
-            <element signature="method#calculateVelocityY#0;class#PhysicsEngine#0" expanded="false" />
-            <element signature="e#1846#1847#0" expanded="true" />
-            <element signature="e#1878#1879#0" expanded="true" />
-            <element signature="e#1911#1912#0" expanded="true" />
-            <element signature="e#1943#1944#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUIDriver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-414">
           <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PhysicsEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="69" column="49" lean-forward="true" selection-start-line="69" selection-start-column="49" selection-end-line="69" selection-end-column="49" />
+          <folding>
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1223#1224#0" expanded="true" />
           </folding>
         </state>
       </provider>
