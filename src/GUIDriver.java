@@ -11,6 +11,7 @@ import javafx.scene.canvas.Canvas;
 
 public class GUIDriver extends Application {
     private Canvas canvas;
+    private static Canvas canvas;
     private boolean fNorth, fEast, fWest, sNorth, sEast, sWest;
     @Override
     public void start(Stage primaryStage) {
@@ -74,6 +75,7 @@ public class GUIDriver extends Application {
 
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
+                System.out.println(currentNanoTime);
                 gc.clearRect(firstPlayer.getPositionX(), firstPlayer.getPositionY(), 30, 30);
                 gc.clearRect(secondPlayer.getPositionX(), secondPlayer.getPositionY(), 30, 30);
 
@@ -92,7 +94,13 @@ public class GUIDriver extends Application {
         }.start();
     }
 
+    public static double getScreenWidth() {
+        return canvas.getWidth();
+    }
 
+    public static double getScreenHeight() {
+        return canvas.getHeight();
+    }
 
     public static void main(String[] args) {
         launch(args);
