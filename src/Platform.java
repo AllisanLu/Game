@@ -27,6 +27,7 @@ public class Platform {
             this.positionEdgeX = new int[0];
             this.positionEdgeY = new int[0];
         }
+        color = Color.GOLD;
     }
 
     public int[] getPositionEdgeX() {
