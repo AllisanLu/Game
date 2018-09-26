@@ -1,15 +1,14 @@
 import javafx.scene.image.Image;
-public class Player {
+
+public class Player extends PhysicsEngine {
+
     private int wins;
-    private int XPosition;
-    private int YPosition;
     private Image model;
 
     public Player(int x, int y) {
+        super(x,y);
         wins = 0;
-        XPosition = x;
-        YPosition = y;
-        //model = new Image("C:/Users/ned_n/OneDrive/Documents/GitHub/Game/First.gif");
+        PhysicsEngine hi = new PhysicsEngine(x, y);
     }
 
     public Image getModel() {
@@ -26,21 +25,5 @@ public class Player {
 
     public void setWins(int wins) {
         this.wins = wins;
-    }
-
-    public int getYPosition() {
-        return YPosition;
-    }
-
-    public void setYPosition(int yPosition) {
-        this.YPosition = yPosition;
-    }
-
-    public int getXPosition() {
-        return XPosition;
-    }
-
-    public void setXPosition(int xPosition) {
-        this.XPosition = xPosition;
     }
 }

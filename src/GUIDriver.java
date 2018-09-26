@@ -11,26 +11,25 @@ import javafx.scene.canvas.Canvas;
 
 public class GUIDriver extends Application {
     private Canvas canvas;
-    private boolean fNorth, fSouth, fEast, fWest, sNorth, sSouth, sEast, sWest;
+    private boolean fNorth, fEast, fWest, sNorth, sEast, sWest;
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         StackPane root = new StackPane();
+
         VBox vbox = new VBox(10);
         vbox.setAlignment(Pos.CENTER);
-        Button[] buttons = createButtons(root);
-        for(Button btn : buttons)
+        for(Button btn : createButtons(root))
             vbox.getChildren().addAll(btn);
+
         root.getChildren().add(vbox);
         root.setAlignment(vbox, Pos.CENTER);
         Scene scene = new Scene(root,400,400);
         scene.setOnKeyPressed(event -> {
             switch(event.getCode()) {
                 case UP: fNorth = true; break;
-                case DOWN: fSouth = true; break;
                 case RIGHT: fEast = true; break;
                 case LEFT: fWest = true; break;
                 case W: sNorth = true; break;
-                case S: sSouth = true; break;
                 case D: sEast = true; break;
                 case A: sWest = true; break;
             }
@@ -38,11 +37,9 @@ public class GUIDriver extends Application {
         scene.setOnKeyReleased(event -> {
             switch(event.getCode()) {
                 case UP: fNorth = false; break;
-                case DOWN: fSouth = false; break;
                 case RIGHT: fEast = false; break;
                 case LEFT: fWest = false; break;
                 case W: sNorth = false; break;
-                case S: sSouth = false; break;
                 case D: sEast = false; break;
                 case A: sWest = false; break;
             }
@@ -69,26 +66,28 @@ public class GUIDriver extends Application {
     private void addPlayers(StackPane root) {
         Player firstPlayer = new Player(200, 200);
         Player secondPlayer = new Player(250, 300 );
+
         canvas = new Canvas(400, 400);
+        root.getChildren().add(canvas);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setLineWidth(5);
-        root.getChildren().add(canvas);
+
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                gc.clearRect(firstPlayer.getXPosition(), firstPlayer.getYPosition(), 30, 30);
-                gc.clearRect(secondPlayer.getXPosition(), secondPlayer.getYPosition(), 30, 30);
-                if(fNorth) firstPlayer.setYPosition(firstPlayer.getYPosition() - 1);
-                else if(fSouth) firstPlayer.setYPosition(firstPlayer.getYPosition() + 1);
-                if(fWest) firstPlayer.setXPosition(firstPlayer.getXPosition() - 1);
-                else if(fEast) firstPlayer.setXPosition(firstPlayer.getXPosition() + 1);
-                if(sNorth) secondPlayer.setYPosition(secondPlayer.getYPosition() - 1);
-                else if(sSouth) secondPlayer.setYPosition(secondPlayer.getYPosition() + 1);
-                if(sWest) secondPlayer.setXPosition(secondPlayer.getXPosition() - 1);
-                else if(sEast) secondPlayer.setXPosition(secondPlayer.getXPosition() + 1);
-                gc.fillRect(firstPlayer.getXPosition(), firstPlayer.getYPosition(), 30, 30);
-                gc.fillRect(secondPlayer.getXPosition(), secondPlayer.getYPosition(), 30, 30);
-                //gc.drawImage(firstPlayer.getModel(), firstPlayer.getXPosition(), firstPlayer.getYPosition());
-                //gc.drawImage(secondPlayer.getModel(), secondPlayer.getXPosition(), secondPlayer.getYPosition());
+                gc.clearRect(firstPlayer.getPositionX(), firstPlayer.getPositionY(), 30, 30);
+                gc.clearRect(secondPlayer.getPositionX(), secondPlayer.getPositionY(), 30, 30);
+
+                if(fNorth) firstPlayer.moveUp();
+                if(sNorth) secondPlayer.moveUp();
+
+                if(fWest) firstPlayer.moveLeft();
+                else if(fEast) firstPlayer.moveRight();
+
+                if(sWest) secondPlayer.moveLeft();
+                else if(sEast) secondPlayer.moveRight();
+
+                gc.fillRect(firstPlayer.getPositionX(), firstPlayer.getPositionY(), 30, 30);
+                gc.fillRect(secondPlayer.getPositionX(), secondPlayer.getPositionX(), 30, 30);
             }
         }.start();
     }
