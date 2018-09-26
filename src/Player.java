@@ -8,7 +8,6 @@ public class Player extends PhysicsEngine {
     public Player(int x, int y) {
         super(x,y);
         wins = 0;
-        PhysicsEngine hi = new PhysicsEngine(x, y);
     }
 
     public Image getModel() {
