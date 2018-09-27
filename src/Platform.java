@@ -1,56 +1,38 @@
 import javafx.scene.paint.Color;
 
 public class Platform {
+    private final double[] positionEdgeX;
+    private final double[] positionEdgeY;
+    private final Color color;
 
-    private int[] positionEdgeX;
-    private int[] positionEdgeY;
-    private Color color;
+    public Platform(double[] positionEdgeX, double[] positionEdgeY, Color color) throws IllegalArgumentException {
 
-    public Platform(int[] positionEdgeX, int[] positionEdgeY, Color color) {
-        if(positionEdgeX.length == positionEdgeY.length) {
-            this.positionEdgeX = positionEdgeX;
-            this.positionEdgeY = positionEdgeY;
-            this.color = color;
-        }
-        else {
-            this.positionEdgeY =  new int[0];
-            this.positionEdgeX = new int[0];
-        }
+        if(positionEdgeX.length != positionEdgeY.length) throw new IllegalArgumentException();
+
+        this.positionEdgeX = positionEdgeX;
+        this.positionEdgeY = positionEdgeY;
+        this.color = color;
     }
 
-    public Platform(int[] positionEdgeX, int[] positionEdgeY) {
-        if(positionEdgeX.length == positionEdgeY.length) {
-            this.positionEdgeX = positionEdgeX;
-            this.positionEdgeY = positionEdgeY;
-        }
-        else {
-            this.positionEdgeX = new int[0];
-            this.positionEdgeY = new int[0];
-        }
-        color = Color.GOLD;
+    public Platform(double[] positionEdgeX, double[] positionEdgeY) throws IllegalArgumentException {
+
+        if(positionEdgeX.length != positionEdgeY.length) throw new IllegalArgumentException();
+
+        this.positionEdgeX = positionEdgeX;
+        this.positionEdgeY = positionEdgeY;
+        this.color = Color.GRAY;
     }
 
-    public int[] getPositionEdgeX() {
+    public double[] getPositionEdgeX() {
         return positionEdgeX;
     }
 
-    public void setPositionEdgeX(int[] positionEdgeX) {
-        this.positionEdgeX = positionEdgeX;
-    }
-
-    public int[] getPositionEdgeY() {
+    public double[] getPositionEdgeY() {
         return positionEdgeY;
     }
 
-    public void setPositionEdgeY(int[] positionEdgeY) {
-        this.positionEdgeY = positionEdgeY;
-    }
 
     public Color getColor() {
         return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 }

@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
 
@@ -23,7 +24,7 @@ public class GUIDriver extends Application {
 
         root.getChildren().add(vbox);
         root.setAlignment(vbox, Pos.CENTER);
-        Scene scene = new Scene(root,400,400);
+        Scene scene = new Scene(root,800,800);
         scene.setOnKeyPressed(event -> {
             switch(event.getCode()) {
                 case UP: fNorth = true; break;
@@ -66,17 +67,20 @@ public class GUIDriver extends Application {
     private void addPlayers(StackPane root) {
         Player firstPlayer = new Player(200, 200);
         Player secondPlayer = new Player(250, 300 );
-
-        canvas = new Canvas(400, 400);
+        double[] rectx = {500, 600, 600, 500};
+        double[] recty = {500, 500, 600, 600};
+        Platform plat = new Platform(rectx, recty, Color.AQUA);
+        canvas = new Canvas(root.getWidth(), root.getHeight());
         root.getChildren().add(canvas);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setLineWidth(5);
+        gc.fillPolygon(plat.getPositionEdgeX(), plat.getPositionEdgeY(), plat.getPositionEdgeX().length);
 
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 gc.clearRect(firstPlayer.getPositionX(), firstPlayer.getPositionY(), 30, 30);
                 gc.clearRect(secondPlayer.getPositionX(), secondPlayer.getPositionY(), 30, 30);
-                System.out.println("                    Second: " + secondPlayer.getPositionX() + " " + secondPlayer.getPositionY());
+                //System.out.println("                    Second: " + secondPlayer.getPositionX() + " " + secondPlayer.getPositionY());
                 if(fNorth) firstPlayer.moveUp();
                 if(sNorth) secondPlayer.moveUp();
 
@@ -90,7 +94,7 @@ public class GUIDriver extends Application {
                 gc.fillRect(firstPlayer.getPositionX(), firstPlayer.getPositionY(), 30, 30);
                 gc.fillRect(secondPlayer.getPositionX(), secondPlayer.getPositionX(), 30, 30);
                 //System.out.println("First: " + firstPlayer.getPositionX() + " " + firstPlayer.getPositionY());
-                System.out.println("Second: " + secondPlayer.getPositionX() + " " + secondPlayer.getPositionY());
+                //System.out.println("Second: " + secondPlayer.getPositionX() + " " + secondPlayer.getPositionY());
             }
         }.start();
     }

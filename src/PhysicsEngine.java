@@ -1,7 +1,3 @@
-import javafx.scene.shape.Rectangle;
-
-import java.awt.*;
-
 /**
  *  This class should be the ultimate decider of where the players are moving goes.
  *  Everything in this class should be calculated off of the acceleration on the players.
@@ -16,13 +12,15 @@ public class  PhysicsEngine {
     private double accelerationX;
 
     private double velocityX;
+    private final double maxVelocityX;
     private double velocityY;
+    private final double maxVelocityY;
 
     private double positionX;
     private double positionY;
 
-    private double sizeX;
-    private double sizeY;
+    private double width;
+    private double height;
 
     /**
      *
@@ -32,17 +30,24 @@ public class  PhysicsEngine {
     public PhysicsEngine(int positionX, int positionY) {
         this.positionX = positionX;
         this.positionY = positionY;
-        accelerationY = 9.81;
-        accelerationX = 2;
+        accelerationY = .5;
+        accelerationX = .4;
+
         velocityX = 0;
+        maxVelocityX = 10;
         velocityY = 0;
+        maxVelocityY = 15;
+
+        width = 30;
+        height = 30;
+
     }
 
     /**
      * Calculates velocity to use for calculating position in the Y-direction.
      * @return
      */
-    private void calculateVelocityY(float direction) {
+    private void calculateVelocityY() {
         velocityY += accelerationY;
     }
 
@@ -54,14 +59,40 @@ public class  PhysicsEngine {
         velocityX += direction * accelerationX;
     }
 
-    private void calculatePositionY(float direction) {                         //when updating lastNanoTime, call getPositionX last although i doubt it would matter much since yea too less of an impact
-        calculateVelocityY(direction);
-        positionY += velocityY;
+    private double calculatePositionY() {
+        calculateVelocityY();
+        if(velocityY > 0 && positionY >= GUIDriver.getScreenHeight() - height){
+            velocityY = 0;
+            return GUIDriver.getScreenHeight() - height;
+        }
+        if(velocityY < 0 && positionY <= 0) {
+            velocityY = 0;
+            return 0;
+        }
+        if(velocityY >= maxVelocityY)
+            velocityY = maxVelocityY;
+        else if(velocityY <= -maxVelocityY) {
+            velocityY = -maxVelocityY;
+        }
+        return positionY + velocityY;
     }
 
-    private void calculatePositionX(float direction) {
-        calculateVelocityX(direction);
-        positionX += velocityX;
+    private double calculatePositionX() {
+        if(velocityX > 0 && positionX >= GUIDriver.getScreenWidth() - width) {
+            velocityX = 0;
+            return GUIDriver.getScreenWidth() - width;
+        }
+        if(velocityX < 0 && positionX <= 0) {
+            velocityX = 0;
+            return 0;
+        }
+        if(velocityX >= maxVelocityX)
+            velocityX = maxVelocityX;
+        else if(velocityX <= -maxVelocityX) {
+            velocityX = -maxVelocityX;
+        }
+        velocityX /= 1.05;
+        return positionX + velocityX;
     }
 
     public double getPositionX() {
@@ -78,25 +109,17 @@ public class  PhysicsEngine {
      * Needs to check for collision.
      */
     public void moveUp() {
-        if(positionY == GUIDriver.getScreenHeight())
-            velocityY = 0;
-        else if(positionY == 0) {
-            velocityY = 50;
+            if(positionY == GUIDriver.getScreenHeight() - height) {
+                velocityY = -30;
+            }
         }
-        calculatePositionY(1);
-    }
 
     /**
      * Called to when the player presses key for moving right.
      * Needs to check for collision.
      */
     public void moveRight() {
-        if(positionX >= GUIDriver.getScreenWidth() - 30) {
-            velocityX = 0;
-            positionX = GUIDriver.getScreenWidth() - 30;
-        }
-        else
-            calculatePositionX(1);
+            calculateVelocityX(1);
     }
 
     /**
@@ -104,12 +127,7 @@ public class  PhysicsEngine {
      * Needs to check for collision.
      */
     public void moveLeft() {
-        if(positionX <= 0) {
-            velocityX = 0;
-            positionX = 0;
-        }
-        else
-            calculatePositionX(-1);
+            calculateVelocityX(-1);
     }
 
     /**
@@ -117,7 +135,7 @@ public class  PhysicsEngine {
      * TODO: rework methods so this works.
      */
     public void updatePosition() {
-        calculatePositionY(1);
-        calculateVelocityX(1);
+        positionX = calculatePositionX();
+        positionY = calculatePositionY();
     }
 }
