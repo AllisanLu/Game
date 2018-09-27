@@ -74,10 +74,9 @@ public class GUIDriver extends Application {
 
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                System.out.println(currentNanoTime);
                 gc.clearRect(firstPlayer.getPositionX(), firstPlayer.getPositionY(), 30, 30);
                 gc.clearRect(secondPlayer.getPositionX(), secondPlayer.getPositionY(), 30, 30);
-
+                System.out.println("                    Second: " + secondPlayer.getPositionX() + " " + secondPlayer.getPositionY());
                 if(fNorth) firstPlayer.moveUp();
                 if(sNorth) secondPlayer.moveUp();
 
@@ -86,9 +85,12 @@ public class GUIDriver extends Application {
 
                 if(sWest) secondPlayer.moveLeft();
                 else if(sEast) secondPlayer.moveRight();
-
+                firstPlayer.updatePosition();
+                secondPlayer.updatePosition();
                 gc.fillRect(firstPlayer.getPositionX(), firstPlayer.getPositionY(), 30, 30);
                 gc.fillRect(secondPlayer.getPositionX(), secondPlayer.getPositionX(), 30, 30);
+                //System.out.println("First: " + firstPlayer.getPositionX() + " " + firstPlayer.getPositionY());
+                System.out.println("Second: " + secondPlayer.getPositionX() + " " + secondPlayer.getPositionY());
             }
         }.start();
     }

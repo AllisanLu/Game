@@ -1,3 +1,7 @@
+import javafx.scene.shape.Rectangle;
+
+import java.awt.*;
+
 /**
  *  This class should be the ultimate decider of where the players are moving goes.
  *  Everything in this class should be calculated off of the acceleration on the players.
@@ -14,10 +18,11 @@ public class  PhysicsEngine {
     private double velocityX;
     private double velocityY;
 
-    private int positionX;
-    private int positionY;
+    private double positionX;
+    private double positionY;
 
-    private long lastNanoTime = 0; // for change in time in the formulas
+    private double sizeX;
+    private double sizeY;
 
     /**
      *
@@ -28,53 +33,43 @@ public class  PhysicsEngine {
         this.positionX = positionX;
         this.positionY = positionY;
         accelerationY = 9.81;
-        accelerationX = 0;
-    }
-
-    /**
-     * Calculates acceleration to use for calculating velocity in the Y-direction.
-     * @return
-     */
-    private double calculateAccelerationY() {
-        return accelerationY;
-    }
-
-    /**
-     * Calculates acceleration to use for calculating velocity in the X-direction.
-     * @return
-     */
-    private double calculateAccelerationX(int direction) {                                              //if the accelertaion is left then negative, if right then positive
-        accelerationX = 1 * direction;
-        return accelerationX;
+        accelerationX = 2;
+        velocityX = 0;
+        velocityY = 0;
     }
 
     /**
      * Calculates velocity to use for calculating position in the Y-direction.
      * @return
      */
-    private double calculateVelocityY(long currentNanoTime) {
-        velocityY += calculateAccelerationY() * (currentNanoTime-lastNanoTime) * Math.pow(10, 9) / 2;        //divide by 2 for average velocity since acceleration is constant
-        return velocityY;
+    private void calculateVelocityY(float direction) {
+        velocityY += accelerationY;
     }
 
     /**
      * Calculates velocity to use for calculating position in the X-direction.
      * @return
      */
-    private double calculateVelocityX(long currentNanoTime, int direction) {
-        velocityX += calculateAccelerationX(direction) * (currentNanoTime-lastNanoTime) * Math.pow(10, 9) / 2;
-        return velocityX;
+    private void calculateVelocityX(float direction) {
+        velocityX += direction * accelerationX;
     }
 
-    public int getPositionY(long currentNanoTime) {                         //when updating lastNanoTime, call getPositionX last although i doubt it would matter much since yea too less of an impact
-        positionY += velocityY * currentNanoTime;
-        return positionY;
+    private void calculatePositionY(float direction) {                         //when updating lastNanoTime, call getPositionX last although i doubt it would matter much since yea too less of an impact
+        calculateVelocityY(direction);
+        positionY += velocityY;
     }
 
-    public int getPositionX(long currentNanoTime) {
-        positionX += velocityX * currentNanoTime;
-        lastNanoTime = currentNanoTime;
+    private void calculatePositionX(float direction) {
+        calculateVelocityX(direction);
+        positionX += velocityX;
+    }
+
+    public double getPositionX() {
         return positionX;
+    }
+
+    public double getPositionY() {
+        return positionY;
     }
 
     /**
@@ -83,7 +78,12 @@ public class  PhysicsEngine {
      * Needs to check for collision.
      */
     public void moveUp() {
-
+        if(positionY == GUIDriver.getScreenHeight())
+            velocityY = 0;
+        else if(positionY == 0) {
+            velocityY = 50;
+        }
+        calculatePositionY(1);
     }
 
     /**
@@ -91,7 +91,12 @@ public class  PhysicsEngine {
      * Needs to check for collision.
      */
     public void moveRight() {
-
+        if(positionX >= GUIDriver.getScreenWidth() - 30) {
+            velocityX = 0;
+            positionX = GUIDriver.getScreenWidth() - 30;
+        }
+        else
+            calculatePositionX(1);
     }
 
     /**
@@ -99,6 +104,20 @@ public class  PhysicsEngine {
      * Needs to check for collision.
      */
     public void moveLeft() {
+        if(positionX <= 0) {
+            velocityX = 0;
+            positionX = 0;
+        }
+        else
+            calculatePositionX(-1);
+    }
 
+    /**
+     * Called every iteration to check for the movement.
+     * TODO: rework methods so this works.
+     */
+    public void updatePosition() {
+        calculatePositionY(1);
+        calculateVelocityX(1);
     }
 }
